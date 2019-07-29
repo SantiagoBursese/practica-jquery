@@ -31,3 +31,4 @@ API de jQuery para consultas https://api.jquery.com/
 2. Colocar un input donde al ingresar un nombre de usuario y tocar el botón "Cargar datos", obtenga los datos de ese usuario y los cargue dinámicamente en la pantalla.
 3. Quitar el botón "Cargar datos" y hacer la acción al tocar la tecla ENTER en el input
 4. Cargar tabla de repositorios únicamente cuando los datos de usuario ya hayan sido cargados.
+5. Al obtener un error, insertar un elemento con fondo rojo con el mensaje "Ha ocurrido un error, por favor ingrese nuevamente nombre de usuario"
