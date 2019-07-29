@@ -1,16 +1,50 @@
 let clicksTotales = 0;
+let usuario;
+let repositorios;
+let user = $("#id_usuario").val();
 
 $(document).ready(function () {
-    $("#id_usuario").text(usuario.login);
-    cargarDatos();
+    login();
+    buscarRepositorios();
     cambiarColorLabelSeguidos();
     cambiarColorLabelSeguidores();
-    contadorClicks();
-   
-    
+    contadorClicks();  
 });
 
+var login = function () {
+    $.ajax({
+        url: "https://api.github.com/users/"+user,
+        type: "get",
+        dataType: "JSON",
+        success: function (json) {
+            usuario = json;
+            cargarDatos();
+        },
+        error: function () {
+            alert("Usuario no encontrado");
+
+        }
+    });
+}
+
+var buscarRepositorios = function () {
+    $.ajax({
+        url: "https://api.github.com/users/"+user+"/repos",
+        type: "get",
+        dataType: "JSON",
+        success: function (json) {
+            repositorios = json;
+            completarTabla();
+        },
+        error: function () {
+            alert("No se encontró el repositorio.");
+        }
+    });
+}
+
+
 var cargarDatos = function () {
+    
     $("#boton_cargar").on("click", function () {
         $("#nombre_usuario").text(usuario.name);
         $("#nombre_empresa").text(usuario.company);
@@ -18,7 +52,6 @@ var cargarDatos = function () {
         $("#numero_gists").text(usuario.public_gists);
         $("#numero_seguidos").text(usuario.following);
         $("#numero_seguidores").text(usuario.followers);
-        completarTabla();
         cargarImagen();
     });
 }
